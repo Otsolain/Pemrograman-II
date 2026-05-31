@@ -1,0 +1,266 @@
+/* ============================================================
+   Tema Aplikasi Penilaian Mahasiswa - Universitas Pamulang
+   Hanya tampilan; tidak mengubah fitur/logika apa pun
+   ============================================================ */
+
+:root {
+    --primary: #1b5e20;
+    --primary-dark: #144618;
+    --primary-light: #2e7d32;
+    --accent: #ffb300;
+    --bg: #eef1f4;
+    --surface: #ffffff;
+    --text: #263238;
+    --muted: #607d8b;
+    --border: #dfe4ea;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* ---------------- HEADER ---------------- */
+.app-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: var(--shadow);
+}
+
+.app-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.app-header-text { text-align: left; }
+.app-subtitle { margin: 0; font-size: 13px; opacity: 0.9; letter-spacing: 0.5px; }
+.app-title    { margin: 2px 0; font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+.app-address  { margin: 0; font-size: 12px; opacity: 0.85; }
+
+/* ---------------- TOPBAR / NAV ---------------- */
+.topbar {
+    background: var(--primary-dark);
+    max-width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+nav ul li { position: relative; }
+
+nav ul li a {
+    display: block;
+    padding: 12px 18px;
+    color: #e8f5e9;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+nav ul li a:hover { background: var(--primary-light); color: #fff; }
+
+/* Dropdown */
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+nav ul li:hover > ul { display: block; }
+
+nav ul ul li a {
+    color: var(--text);
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+nav ul ul li a:hover { background: #e8f5e9; color: var(--primary); }
+
+/* ---------------- LAYOUT ---------------- */
+.layout {
+    display: flex;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 24px;
+    align-items: flex-start;
+}
+
+.sidebar {
+    width: 230px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 18px;
+}
+
+#menu { font-size: 14px; }
+#menu b { color: var(--primary); display: inline-block; margin-bottom: 4px; }
+
+#menu a {
+    display: block;
+    padding: 8px 12px;
+    margin: 3px 0;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+#menu a:hover {
+    background: #e8f5e9;
+    color: var(--primary);
+    padding-left: 18px;
+}
+
+.content {
+    flex: 1;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 26px 30px;
+    min-height: 420px;
+}
+
+.content h1, .content h2, .content h3 {
+    color: var(--primary-dark);
+    margin-top: 0;
+}
+
+/* ---------------- TABEL ---------------- */
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-size: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.content th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid var(--primary);
+}
+
+.content td {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+}
+
+.content tr:nth-child(even) td { background: #f6f8f9; }
+.content tr:hover td { background: #eef7ef; }
+
+/* ---------------- FORM ---------------- */
+.content input[type="text"],
+.content input[type="password"],
+.content input[type="number"],
+.content select {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 2px 0;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.content input:focus,
+.content select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+/* Tombol (submit & button) */
+.content input[type="submit"],
+.content button {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 3px 4px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.content input[type="submit"]:hover,
+.content button:hover { background: var(--primary-light); }
+
+.content input[type="submit"]:active,
+.content button:active { transform: translateY(1px); }
+
+/* Link teks di dalam konten */
+.content a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.content a:hover { text-decoration: underline; }
+
+.content p { font-size: 14px; }
+
+/* ---------------- FOOTER ---------------- */
+.app-footer {
+    background: var(--primary-dark);
+    color: #c8e6c9;
+    text-align: center;
+    padding: 14px;
+    font-size: 12px;
+    margin-top: 30px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 800px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; }
+    nav ul { flex-direction: column; }
+    nav ul ul { position: static; box-shadow: none; }
+}

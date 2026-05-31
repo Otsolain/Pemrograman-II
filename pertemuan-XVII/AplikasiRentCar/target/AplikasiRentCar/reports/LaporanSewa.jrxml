@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="LaporanSewa"
+              pageWidth="842" pageHeight="595"
+              orientation="Landscape"
+              columnWidth="782" leftMargin="30" rightMargin="30"
+              topMargin="20" bottomMargin="20">
+
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+
+    <queryString>
+        <![CDATA[
+            SELECT s.kode_sewa, c.nama AS nama_customer, m.nama_mobil, m.merk,
+                   s.tgl_sewa, s.lama_sewa, s.total_biaya, s.status
+            FROM tbsewa s
+            JOIN tbcustomer c ON s.kode_customer = c.kode_customer
+            JOIN tbmobil m    ON s.kode_mobil    = m.kode_mobil
+            ORDER BY s.tgl_sewa DESC
+        ]]>
+    </queryString>
+
+    <field name="kode_sewa"     class="java.lang.String"/>
+    <field name="nama_customer" class="java.lang.String"/>
+    <field name="nama_mobil"    class="java.lang.String"/>
+    <field name="merk"          class="java.lang.String"/>
+    <field name="tgl_sewa"      class="java.sql.Date"/>
+    <field name="lama_sewa"     class="java.lang.Integer"/>
+    <field name="total_biaya"   class="java.lang.Double"/>
+    <field name="status"        class="java.lang.String"/>
+
+    <variable name="grandTotal" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{total_biaya}]]></variableExpression>
+    </variable>
+
+    <pageHeader>
+        <band height="60">
+            <staticText>
+                <reportElement x="0" y="0" width="782" height="22"/>
+                <textElement textAlignment="Center"><font size="15" isBold="true"/></textElement>
+                <text><![CDATA[LAPORAN TRANSAKSI PENYEWAAN MOBIL]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="24" width="782" height="16"/>
+                <textElement textAlignment="Center"><font size="9"/></textElement>
+                <text><![CDATA[Rent Car System]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="22">
+            <staticText>
+                <reportElement x="0" y="0" width="90" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Kode Sewa]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="90" y="0" width="160" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Customer]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="250" y="0" width="200" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Mobil]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="450" y="0" width="100" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Tgl Sewa]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="550" y="0" width="60" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Lama]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="610" y="0" width="100" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Total Biaya]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="710" y="0" width="72" height="22" backcolor="#BBD4F0" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="18">
+            <textField>
+                <reportElement x="0" y="0" width="90" height="18"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{kode_sewa}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="90" y="0" width="160" height="18"/>
+                <box leftPadding="4"><pen lineWidth="0.5"/></box>
+                <textElement verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{nama_customer}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="250" y="0" width="200" height="18"/>
+                <box leftPadding="4"><pen lineWidth="0.5"/></box>
+                <textElement verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{nama_mobil} + " (" + $F{merk} + ")"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="450" y="0" width="100" height="18"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{tgl_sewa}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="550" y="0" width="60" height="18"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{lama_sewa} + " hari"]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0">
+                <reportElement x="610" y="0" width="100" height="18"/>
+                <box rightPadding="4"><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA["Rp " + new java.text.DecimalFormat("#,##0").format($F{total_biaya})]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="710" y="0" width="72" height="18"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="782" height="20"/>
+                <textElement textAlignment="Right"><font size="8"/></textElement>
+                <textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="24">
+            <staticText>
+                <reportElement x="450" y="0" width="160" height="22" backcolor="#DDE8F7" mode="Opaque"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <text><![CDATA[Grand Total : ]]></text>
+            </staticText>
+            <textField pattern="#,##0">
+                <reportElement x="610" y="0" width="172" height="22" backcolor="#DDE8F7" mode="Opaque"/>
+                <box rightPadding="4"><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font isBold="true" size="9"/></textElement>
+                <textFieldExpression><![CDATA["Rp " + new java.text.DecimalFormat("#,##0").format($V{grandTotal})]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+
+</jasperReport>
