@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.unpam</groupId>
-    <artifactId>AplikasiPenilaianMahasiswa</artifactId>
+    <artifactId>PenilaianMahasiswa-14-Base</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>AplikasiPenilaianMahasiswa</name>
+    <name>PenilaianMahasiswa-14-Base</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,24 +33,10 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.8.1.jre8</version>
         </dependency>
-
-        <!-- JasperReports untuk membuat laporan PDF (versi 6.x, kompatibel javax + Java 8) -->
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-            <version>6.20.0</version>
-        </dependency>
-
-        <!-- Compiler JDT (ecj) untuk meng-compile file .jrxml saat runtime -->
-        <dependency>
-            <groupId>org.eclipse.jdt</groupId>
-            <artifactId>ecj</artifactId>
-            <version>3.21.0</version>
-        </dependency>
     </dependencies>
 
     <build>
-        <finalName>AplikasiPenilaianMahasiswa</finalName>
+        <finalName>PenilaianMahasiswa14</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

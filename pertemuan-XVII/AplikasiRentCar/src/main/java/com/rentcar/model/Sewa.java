@@ -34,12 +34,36 @@ public class Sewa {
     public void hitungBiaya(double hargaPerHari) {
         LocalDate tgl1 = LocalDate.parse(tglSewa);
         LocalDate tgl2 = LocalDate.parse(tglKembaliRencana);
-        lamaSewa   = (int) ChronoUnit.DAYS.between(tgl1, tgl2);
+        long selisih = ChronoUnit.DAYS.between(tgl1, tgl2);
+        lamaSewa   = (selisih < 1) ? 1 : (int) selisih;
         totalBiaya = lamaSewa * hargaPerHari;
+    }
+
+    public String generateKodeSewa() {
+        String kodeBaru = "SW001";
+        Connection conn = koneksi.getConnection();
+        if (conn != null) {
+            try {
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(
+                    "SELECT MAX(kode_sewa) AS maksimal FROM tbsewa WHERE kode_sewa LIKE 'SW%'");
+                if (rs.next() && rs.getString("maksimal") != null) {
+                    String terakhir = rs.getString("maksimal");
+                    int angka = Integer.parseInt(terakhir.substring(2)) + 1;
+                    kodeBaru = String.format("SW%03d", angka);
+                }
+                st.close();
+                conn.close();
+            } catch (Exception ex) { pesan = "Error: " + ex; }
+        } else { pesan = koneksi.getPesanKesalahan(); }
+        return kodeBaru;
     }
 
     public boolean simpan() {
         boolean adaKesalahan = false;
+        if (kodeSewa == null || kodeSewa.trim().isEmpty()) {
+            kodeSewa = generateKodeSewa();
+        }
         Connection conn = koneksi.getConnection();
         if (conn != null) {
             try {
@@ -73,19 +97,38 @@ public class Sewa {
         Connection conn = koneksi.getConnection();
         if (conn != null) {
             try {
-                PreparedStatement ps2 = conn.prepareStatement(
-                    "UPDATE tbmobil SET status='Tersedia' WHERE kode_mobil=" +
-                    "(SELECT kode_mobil FROM tbsewa WHERE kode_sewa=?)");
-                ps2.setString(1, kodeSewa);
-                ps2.executeUpdate();
+                String mobilTerkait = null;
+                PreparedStatement cek = conn.prepareStatement(
+                    "SELECT kode_mobil, status FROM tbsewa WHERE kode_sewa=?");
+                cek.setString(1, kodeSewa);
+                ResultSet rs = cek.executeQuery();
+                if (rs.next()) {
+                    mobilTerkait = rs.getString("kode_mobil");
+                    if ("Selesai".equals(rs.getString("status"))) {
+                        adaKesalahan = true;
+                        pesan = "Transaksi sewa ini sudah dikembalikan sebelumnya";
+                    }
+                } else {
+                    adaKesalahan = true;
+                    pesan = "Kode sewa tidak ditemukan";
+                }
+                cek.close();
 
-                PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE tbsewa SET tgl_kembali_aktual=?, status='Selesai' WHERE kode_sewa=?");
-                ps.setString(1, tglKembaliAktual);
-                ps.setString(2, kodeSewa);
-                if (ps.executeUpdate() < 1) { adaKesalahan = true; pesan = "Kode sewa tidak ditemukan"; }
+                if (!adaKesalahan) {
+                    PreparedStatement ps = conn.prepareStatement(
+                        "UPDATE tbsewa SET tgl_kembali_aktual=?, status='Selesai' WHERE kode_sewa=?");
+                    ps.setString(1, tglKembaliAktual);
+                    ps.setString(2, kodeSewa);
+                    ps.executeUpdate();
+                    ps.close();
 
-                ps.close(); ps2.close(); conn.close();
+                    PreparedStatement ps2 = conn.prepareStatement(
+                        "UPDATE tbmobil SET status='Tersedia' WHERE kode_mobil=?");
+                    ps2.setString(1, mobilTerkait);
+                    ps2.executeUpdate();
+                    ps2.close();
+                }
+                conn.close();
             } catch (SQLException ex) { adaKesalahan = true; pesan = "Error: " + ex; }
         } else { adaKesalahan = true; pesan = koneksi.getPesanKesalahan(); }
         return !adaKesalahan;

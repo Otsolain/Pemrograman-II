@@ -1,8 +1,3 @@
--- ============================================================
--- Aplikasi Penilaian Mahasiswa - Microsoft SQL Server (T-SQL)
--- Jalankan di SQL Server Management Studio (SSMS)
--- ============================================================
-
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'dbaplikasipenilaianmahasiswa')
     CREATE DATABASE dbaplikasipenilaianmahasiswa;
 GO
@@ -36,28 +31,11 @@ IF OBJECT_ID('tbuser', 'U') IS NULL
     );
 GO
 
-IF OBJECT_ID('tbnilai', 'U') IS NULL
-    CREATE TABLE tbnilai (
-        id          INT IDENTITY(1,1) PRIMARY KEY,
-        nim         VARCHAR(15),
-        kode_mk     VARCHAR(10),
-        nilai_tugas FLOAT,
-        nilai_uts   FLOAT,
-        nilai_uas   FLOAT,
-        nilai_akhir FLOAT,
-        grade       VARCHAR(2),
-        CONSTRAINT fk_nilai_mhs FOREIGN KEY (nim)     REFERENCES tbmahasiswa(nim),
-        CONSTRAINT fk_nilai_mk  FOREIGN KEY (kode_mk) REFERENCES tbmatakuliah(kode_mk)
-    );
-GO
-
--- User admin default (username: admin, password: admin)
 IF NOT EXISTS (SELECT 1 FROM tbuser WHERE username = 'admin')
     INSERT INTO tbuser (username, password, nama)
     VALUES ('admin', LOWER(CONVERT(VARCHAR(32), HASHBYTES('MD5', 'admin'), 2)), 'Administrator');
 GO
 
--- Login SQL Server Authentication untuk koneksi aplikasi (user: app_user)
 IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = 'app_user')
     CREATE LOGIN app_user WITH PASSWORD = 'AppUser123!', CHECK_POLICY = OFF;
 GO

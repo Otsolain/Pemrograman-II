@@ -32,10 +32,6 @@ public class MainForm extends HttpServlet {
                  + "<b>Master Data</b><br>"
                  + "<a href='MahasiswaController'>Mahasiswa</a><br>"
                  + "<a href='MataKuliahController'>Mata Kuliah</a><br><br>"
-                 + "<b>Transaksi</b><br>"
-                 + "<a href='NilaiController'>Nilai</a><br><br>"
-                 + "<b>Laporan</b><br>"
-                 + "<a href='LaporanNilaiController'>Nilai</a><br><br>"
                  + "<a href='LogoutController'>Logout</a><br><br>";
 
             topMenu = "<nav><ul>"
@@ -45,22 +41,16 @@ public class MainForm extends HttpServlet {
                  + "<li><a href='MahasiswaController'>Mahasiswa</a></li>"
                  + "<li><a href='MataKuliahController'>Mata Kuliah</a></li>"
                  + "</ul></li>"
-                 + "<li><a href='#'>Transaksi</a>"
-                 + "<ul><li><a href='NilaiController'>Nilai</a></li></ul></li>"
-                 + "<li><a href='#'>Laporan</a>"
-                 + "<ul><li><a href='LaporanNilaiController'>Nilai</a></li></ul></li>"
                  + "<li><a href='LogoutController'>Logout</a></li>"
                  + "</ul></nav>";
 
         } else if (role.equals("mahasiswa")) {
             menu = "<br><b>" + userName + "</b> (Mahasiswa)<br><br>"
                  + "<b>Menu</b><br>"
-                 + "<a href='NilaiController?aksi=nilaiSaya'>Nilai Saya</a><br><br>"
                  + "<a href='LogoutController'>Logout</a><br><br>";
 
             topMenu = "<nav><ul>"
                  + "<li><a href='MainForm'>Home</a></li>"
-                 + "<li><a href='NilaiController?aksi=nilaiSaya'>Nilai Saya</a></li>"
                  + "<li><a href='LogoutController'>Logout</a></li>"
                  + "</ul></nav>";
 

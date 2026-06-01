@@ -61,7 +61,7 @@ public class SewaController extends HttpServlet {
             sb.append("<form method='POST' action='SewaController'>");
             sb.append("<input type='hidden' name='aksi' value='simpan'>");
             sb.append("<table cellpadding='6'>");
-            sb.append("<tr><td>Kode Sewa</td><td><input type='text' name='kodeSewa' placeholder='SW001'></td></tr>");
+            sb.append("<tr><td>Kode Sewa</td><td><input type='text' name='kodeSewa' placeholder='(otomatis jika kosong)'></td></tr>");
 
             sb.append("<tr><td>Customer</td><td><select name='kodeCustomer'>");
             if (customer.getList() != null) for (Object[] row : customer.getList())
@@ -80,7 +80,7 @@ public class SewaController extends HttpServlet {
             sb.append("<tr><td colspan='2'><input type='submit' value='Simpan Transaksi'> ");
             sb.append("<a href='SewaController'>Batal</a></td></tr>");
             sb.append("</table></form>");
-            sb.append("<p><small>Harga sewa per hari diambil otomatis dari data mobil yang dipilih.</small></p>");
+            sb.append("<p><small>Kode sewa terisi otomatis jika dikosongkan. Harga sewa per hari diambil otomatis dari data mobil yang dipilih.</small></p>");
             konten = sb.toString();
 
         } else if (aksi.equals("simpan")) {
@@ -96,6 +96,7 @@ public class SewaController extends HttpServlet {
             sewa.hitungBiaya(harga);
             konten = sewa.simpan()
                 ? "<p style='color:green;'><b>Transaksi sewa berhasil disimpan!</b></p>"
+                  + "<p>Kode Sewa: <b>" + sewa.getKodeSewa() + "</b></p>"
                   + "<p>Lama Sewa: <b>" + sewa.getLamaSewa() + " hari</b></p>"
                   + "<p>Total Biaya: <b>Rp " + String.format("%,.0f", sewa.getTotalBiaya()) + "</b></p>"
                   + "<a href='SewaController'>Kembali ke Daftar</a>"

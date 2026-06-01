@@ -33,7 +33,8 @@ public class Mobil {
         if (conn != null) {
             try {
                 PreparedStatement ps = conn.prepareStatement(
-                    "INSERT INTO tbmobil VALUES (?,?,?,?,?,?,'Tersedia')");
+                    "INSERT INTO tbmobil(kode_mobil, nama_mobil, merk, tahun, kapasitas, harga_sewa, status) "
+                  + "VALUES (?,?,?,?,?,?,'Tersedia')");
                 ps.setString(1, kodeMobil);
                 ps.setString(2, namaMobil);
                 ps.setString(3, merk);
@@ -42,6 +43,35 @@ public class Mobil {
                 ps.setDouble(6, hargaSewa);
                 if (ps.executeUpdate() < 1) { adaKesalahan = true; pesan = "Gagal menyimpan data mobil"; }
                 ps.close(); conn.close();
+            } catch (SQLException ex) { adaKesalahan = true; pesan = "Error: " + ex; }
+        } else { adaKesalahan = true; pesan = koneksi.getPesanKesalahan(); }
+        return !adaKesalahan;
+    }
+
+    public boolean hapus() {
+        boolean adaKesalahan = false;
+        Connection conn = koneksi.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement cek = conn.prepareStatement(
+                    "SELECT COUNT(*) FROM tbsewa WHERE kode_mobil=?");
+                cek.setString(1, kodeMobil);
+                ResultSet rs = cek.executeQuery();
+                rs.next();
+                int jumlahTransaksi = rs.getInt(1);
+                cek.close();
+
+                if (jumlahTransaksi > 0) {
+                    adaKesalahan = true;
+                    pesan = "Mobil tidak dapat dihapus karena memiliki riwayat transaksi sewa";
+                } else {
+                    PreparedStatement ps = conn.prepareStatement(
+                        "DELETE FROM tbmobil WHERE kode_mobil=?");
+                    ps.setString(1, kodeMobil);
+                    if (ps.executeUpdate() < 1) { adaKesalahan = true; pesan = "Kode mobil tidak ditemukan"; }
+                    ps.close();
+                }
+                conn.close();
             } catch (SQLException ex) { adaKesalahan = true; pesan = "Error: " + ex; }
         } else { adaKesalahan = true; pesan = koneksi.getPesanKesalahan(); }
         return !adaKesalahan;

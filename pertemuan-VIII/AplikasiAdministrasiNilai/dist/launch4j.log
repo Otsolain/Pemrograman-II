@@ -1,0 +1,37 @@
+
+
+Version:	3.50
+CmdLine:	C:\Users\Otsolain\Desktop\Pemrograman-II\pemrograman-ii\pertemuan-VIII\AplikasiAdministrasiNilai\dist\AplikasiAdministrasiNilai.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Otsolain\Desktop\Pemrograman-II\pemrograman-ii\pertemuan-VIII\AplikasiAdministrasiNilai\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.000
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\180\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\DTS\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Otsolain\AppData\Local\Microsoft\WindowsApps;C:\Users\Otsolain\AppData\Local\Programs\Kiro\bin;C:\Users\Otsolain\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\Otsolain\AppData\Local\Programs\IBM Bob\bin;C:\Program Files\Java\jre1.8.0_491\bin
+JRE paths:	;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\180\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\DTS\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Otsolain\AppData\Local\Microsoft\WindowsApps;C:\Users\Otsolain\AppData\Local\Programs\Kiro\bin;C:\Users\Otsolain\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\Otsolain\AppData\Local\Programs\IBM Bob\bin;C:\Program Files\Java\jre1.8.0_491\bin
+Check launcher:	C:\Program Files (x86)\Common Files\Oracle\Java\java8path\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Microsoft SQL Server\170\Tools\Binn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Microsoft SQL Server\170\Tools\Binn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\180\Tools\Binn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Microsoft SQL Server\170\DTS\Binn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Docker\Docker\resources\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Otsolain\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Otsolain\AppData\Local\Programs\Kiro\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Otsolain\AppData\Local\Programs\Antigravity IDE\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Otsolain\AppData\Local\Programs\IBM Bob\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jre1.8.0_491\bin\javaw.exe (OK)
+Version string: 1.008.000_491 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jre1.8.0_491\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Otsolain\Desktop\Pemrograman-II\pemrograman-ii\pertemuan-VIII\AplikasiAdministrasiNilai\dist\AplikasiAdministrasiNilai.exe"
+Args length:	138/32768 chars
+Exit code:	0
